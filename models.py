@@ -168,6 +168,16 @@ class User(db.Model):
                 return user
 
         return False
+    
+    @classmethod
+    def get(cls, id):
+        """Method to retrieve a user from an ID"""
+        return cls.query.get_or_404(id)
+    
+    @classmethod
+    def get_all(cls):
+        """Method to retrieve all users"""
+        return cls.query.all()
 
 
 class Message(db.Model):
@@ -198,6 +208,17 @@ class Message(db.Model):
     )
 
     user = db.relationship('User')
+    
+    @classmethod
+    def get(cls, id):
+        """Retrieve a message using an id"""
+        return cls.query.get_or_404(id)
+    
+    @classmethod
+    def get_all(cls):
+        """Return all messages"""
+        return cls.query.all()
+        
 
 
 def connect_db(app):
