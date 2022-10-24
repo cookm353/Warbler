@@ -34,7 +34,7 @@ def add_user_to_g():
     """If we're logged in, add curr user to Flask global."""
 
     if CURR_USER_KEY in session:
-        g.user = User.query.get(session[CURR_USER_KEY])
+        g.user = User.get(session[CURR_USER_KEY])
 
     else:
         g.user = None
@@ -112,7 +112,7 @@ def login():
 @app.route('/logout')
 def logout():
     """Handle logout of user."""
-
+    do_logout()
     # IMPLEMENT THIS
 
 
@@ -129,7 +129,7 @@ def list_users():
     search = request.args.get('q')
 
     if not search:
-        users = User.query.all()
+        users = User.get_all()
     else:
         users = User.query.filter(User.username.like(f"%{search}%")).all()
 
@@ -140,7 +140,7 @@ def list_users():
 def users_show(user_id):
     """Show user profile."""
 
-    user = User.query.get_or_404(user_id)
+    user = User.get(user_id)
 
     # snagging messages in order from the database;
     # user.messages won't be in order by default
@@ -161,7 +161,7 @@ def show_following(user_id):
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    user = User.query.get_or_404(user_id)
+    user = User.get(user_id)
     return render_template('users/following.html', user=user)
 
 
@@ -173,7 +173,7 @@ def users_followers(user_id):
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    user = User.query.get_or_404(user_id)
+    user = User.get(user_id)
     return render_template('users/followers.html', user=user)
 
 
@@ -185,7 +185,7 @@ def add_follow(follow_id):
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    followed_user = User.query.get_or_404(follow_id)
+    followed_user = User.get(follow_id)
     g.user.following.append(followed_user)
     db.session.commit()
 
@@ -200,7 +200,7 @@ def stop_following(follow_id):
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    followed_user = User.query.get(follow_id)
+    followed_user = User.get(follow_id)
     g.user.following.remove(followed_user)
     db.session.commit()
 
