@@ -116,11 +116,8 @@ def logout():
     flash('Logged out!', 'sucesss')
     
     return redirect('/login')
-    # IMPLEMENT THIS
 
-
-##############################################################################
-# General user routes:
+"""General user routes"""
 
 @app.route('/users')
 def list_users():
