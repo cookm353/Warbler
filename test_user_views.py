@@ -17,11 +17,18 @@ class TestUserViews(TestCase):
         Likes.query.delete()
         User.query.delete()
         Message.query.delete()
-        
-        alice = User()
-        
+
+        alice = User(username='Alice89', password='qwerty',
+                     email='alice@gmail.com')
+        bob = User(username='BobB', password='1234',
+                   email='bboy@gmail.com')
+
+        db.session.add_all([alice, bob])
+        db.session.commit()
+
+
     def tearDown(self):
         ...
-        
+
     def test_login(self):
         ...
