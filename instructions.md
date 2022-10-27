@@ -45,11 +45,11 @@ PorousLoris
     - [x] header_image_url
     - [x] bio
     - [x] password
-- [ ] Check if the password is valid
-  - [ ] If not, flash an error and return to homepage
-- [ ] Form should edit the user for all fields *except* their password
-  - [ ] The password field is only to check if it's the right current password
-- [ ] On success, it should redirect to user detail page
+- [x] Check if the password is valid
+  - [x] If not, flash an error and return to homepage
+- [x] Form should edit the user for all fields *except* their password
+  - [x] The password field is only to check if it's the right current password
+- [x] On success, it should redirect to user detail page
 
 ### Step 6: Fix Homepage
 
