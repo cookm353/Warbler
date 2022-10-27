@@ -1,5 +1,5 @@
 from unittest import TestCase
-from app import app
+from app import CURR_USER_KEY, app
 import bcrypt
 from models import Follows, User, Likes, Message, db
 
@@ -76,6 +76,10 @@ class TestUserViews(TestCase):
             self.assertIn('Welcome back', html)
             
     def test_valid_login(self):
+        with self.client as client:
+            with client.session_transaction() as session:
+                sessin[CURR_USER_KEY] = 
+        
         with app.test_client() as client:
             data = {'username': 'Alice89', 
                     'password': 'qwerty'}
@@ -103,7 +107,7 @@ class TestUserViews(TestCase):
             self.assertIn("@Alice89", html)
             self.assertNotIn('Follow', html)
         
-    def etst_users_page_logged_in(self):
+    def test_users_page_logged_in(self):
         with app.test_client() as client:
             # Log in and then test
             
@@ -112,3 +116,12 @@ class TestUserViews(TestCase):
             
             self.assertEqual(resp.status_code, 200)
             self.assertIn('Follow', html)
+            
+    def test_deleting_user(self):
+        with app.test_client() as client:
+            # Log user in
+            
+            resp = client.post('/users/delete')
+            html = resp.get_data(as_text=True)
+            
+            self.assertEqual(resp.status_code, 200)
