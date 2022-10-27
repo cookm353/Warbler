@@ -178,7 +178,19 @@ class User(db.Model):
     def get_all(cls):
         """Method to retrieve all users"""
         return cls.query.all()
-
+    
+    @staticmethod
+    def edit_user(form_data):
+        username = form_data.get('username')
+        user = User.query.filter_by(username=username).first()
+            
+        user.email = form_data.get('email')
+        user.image_url = form_data.get('image_url')
+        user.header_image_url = form_data.get('header_image_url')
+        user.bio = form_data.get('bio')
+        
+        db.session.add(user)
+        db.session.commit()
 
 class Message(db.Model):
     """An individual message ("warble")."""
