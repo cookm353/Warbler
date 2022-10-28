@@ -36,7 +36,7 @@ PorousLoris
 
 ### Step 5: Profile Edit
 
-- [ ] Implement buttons for editing profile
+- [x] Implement buttons for editing profile
   - [x] Ensure user is logged on first!
   - [x] Show a form with the following:
     - [x] Username
@@ -60,18 +60,26 @@ PorousLoris
 - [ ] Check out code in app.py related to authentication
   - [ ] How's the logged in user being kept track of?
   - [ ] What's the **g** object?
+    - **g** is a namespace that can hold data in the application context
+    - Data persists as lok as the page is open
+    - 
   - [ ] What's the purpose of `add_user_to_g`?
+    - Store the current user so they can be accessed more easily
   - [ ] What does `@app.before_request` mean?
+    - Decorator that causes the function to run before any request is handled
   
 ## Part 2: Add Likes
 
 - Don't use any JS for this step!
 - [ ] Add a feature allowing a user to like and unlike warbles
-  - [ ] Users should only be able to like warbles written by other users
+  - [x] Users should only be able to like warbles written by other users
   - [ ] Liking a warble should add a star or some other symbol next to the liked warble
-  - [ ] Liking and unliking a warble should be done by clicking on the star (or other symbol)
+  - [x] Liking and unliking a warble should be done by clicking on the star (or other symbol)
 - [ ] Profile page should show how many warbles the user has liked
   - [ ] There should be a link to a page showing the user's liked warbles
+
+- Clicking the thumbs up should be linked to a POST request
+- Should 
 
 ## Part 3: Add Tests
 
