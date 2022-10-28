@@ -317,12 +317,20 @@ def homepage():
     """
 
     if g.user:
-        messages = (Message
-                    .query
-                    .order_by(Message.timestamp.desc())
-                    .limit(100)
-                    .all())
-
+        msgs = []
+        followed_users = g.user.following
+        
+        for user in followed_users:
+            for msg in user.messages:
+                msgs.append(msg)
+                
+        msgs_dict = {msg.timestamp: msg.id for msg in msgs}
+        sorted_dict = dict(sorted(msgs_dict.items(), reverse=True))
+        messages = [Message.get(val) for val in sorted_dict.values()]
+        
+        if len(messages) > 100:
+            messages = messages[:100]
+        
         return render_template('home.html', messages=messages)
 
     else:
