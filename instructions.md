@@ -53,7 +53,7 @@ PorousLoris
 
 ### Step 6: Fix Homepage
 
-- [ ] Home page for logged-in users should show that last 100 warbles from only users that the logged-in user is following and the user, **not** all users
+- [x] Home page for logged-in users should show that last 100 warbles from only users that the logged-in user is following and the user, **not** all users
 
 ### Step 7: Research and Understand Login Strategy
 
@@ -64,7 +64,7 @@ PorousLoris
   - [ ] What does `@app.before_request` mean?
   
 ## Part 2: Add Likes
-    
+
 - Don't use any JS for this step!
 - [ ] Add a feature allowing a user to like and unlike warbles
   - [ ] Users should only be able to like warbles written by other users
