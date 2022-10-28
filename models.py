@@ -47,6 +47,21 @@ class Likes(db.Model):
         db.ForeignKey('messages.id', ondelete='cascade'),
         unique=True
     )
+    
+    @classmethod
+    def add(cls, user_id, message_id):
+        new_like = cls(user_id=user_id, message_id=message_id)
+        db.session.add(new_like)
+        db.session.commit()
+        
+    @classmethod
+    def remove(cls, user_id, message_id):
+        cls.query.filter(user_id==user_id and message_id==message_id).delete()
+        db.session.commit()
+        
+    @classmethod
+    def check_for_like(cls, user_id, message_id):
+        return cls.query.filter(user_id == user_id and message_id == message_id).one_or_none()
 
 
 class User(db.Model):
