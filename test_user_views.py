@@ -78,7 +78,8 @@ class TestUserViews(TestCase):
     def test_valid_login(self):
         with self.client as client:
             with client.session_transaction() as session:
-                sessin[CURR_USER_KEY] = 
+                # sessin[CURR_USER_KEY] = 
+                ...
         
         with app.test_client() as client:
             data = {'username': 'Alice89', 
