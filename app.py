@@ -236,7 +236,6 @@ def profile():
         
     else:
         return render_template('users/edit.html', form=form)
-    # IMPLEMENT THIS
 
 
 @app.route('/users/delete', methods=["POST"])
@@ -265,6 +264,18 @@ def favorite_message(message_id):
         Likes.remove(user_id, message_id)
     
     return redirect('/')
+
+
+@app.route('/users/<int:user_id>/likes', methods=['GET'])
+def show_liked_messages(user_id):
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    
+    user = User.get(user_id)
+    liked_msgs = user.likes
+    
+    return render_template('users/likes.html', messages=liked_msgs)
 
 
 ##############################################################################
