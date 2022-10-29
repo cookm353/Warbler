@@ -78,9 +78,6 @@ PorousLoris
 - [ ] Profile page should show how many warbles the user has liked
   - [ ] There should be a link to a page showing the user's liked warbles
 
-- Clicking the thumbs up should be linked to a POST request
-- Should 
-
 ## Part 3: Add Tests
 
 - There are 4 test files: test_user_model.py, test_user_views.py, test_message_model.py, and test_message_views.py
