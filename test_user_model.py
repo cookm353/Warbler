@@ -40,6 +40,25 @@ class UserModelTestCase(TestCase):
         Follows.query.delete()
 
         self.client = app.test_client()
+        
+        alice = User(email='alice@test.com', username='alice',
+                     password='abc123')
+        bob = User(email='bob@test.com', username='bob',
+                   password='abc123')
+        charlie = User(email='charlie@test.com', username='charlie',
+                       password='abc123')
+        
+        db.session.add_all([alice, bob, charlie])
+        db.session.commit()
+        
+        follow1 = Follows(user_being_followed_id=1, user_following_id=2)
+        follow2 = Follows(user_being_followed_id=2, user_following_id=1)
+        follow3 = Follows(user_being_followed_id=1, user_following_id=3)
+        follow4 = Follows(user_being_followed_id=2, user_following_id=3)
+        
+        db.session.add_all([follow1, follow2, follow3, follow4])
+        db.session.commit()
+        
 
     def test_user_model(self):
         """Does basic model work?"""
@@ -56,3 +75,56 @@ class UserModelTestCase(TestCase):
         # User should have no messages & no followers
         self.assertEqual(len(u.messages), 0)
         self.assertEqual(len(u.followers), 0)
+        
+    def test_getting_user(self):
+        alice = User.get(1)
+        
+        self.assertIsInstance(alice, User)
+        self.assertEqual(alice.username, 'alice')
+        
+    def test_getting_all_users(self):
+        users = User.get_all()
+        
+        self.assertIsInstance(users, list)
+        
+        for user in users:
+            self.assertIsInstance(user, User)
+        
+    def test_repr(self):
+        alice = User.get(1)
+        self.assertEqual(repr(alice), '<User #1: alice, alice@test.com>')
+        
+    def test_is_following(self):
+        alice = User.get(1)
+        charlie = User.get(3)
+        
+        self.assertTrue(charlie.is_following(alice))
+        self.assertFalse(alice.is_following(charlie))
+        
+    def test_is_being_followed_by(self):
+        alice = User.get(1)
+        charlie = User.get(3)
+        
+        self.assertTrue(alice.is_followed_by(charlie))
+        self.assertFalse(charlie.is_followed_by(alice))
+        
+    def test_successfully_creating_user(self):
+        User.signup('deb', 'deb@test.com', 'abc123', User.image_url.default.arg)
+        deb = User.get(4)
+        
+        self.assertIsInstance(deb, User)
+        
+    def test_unsuccessfully_creating_user(self):
+        with self.assertRaises(Exception):
+            User.signup('deb', 'deb@test.com', 'abc123')            
+        
+    def test_successful_authentication(self):
+        User.signup('deb', 'deb@test.com', 'abc123', User.image_url.default.arg)
+        
+        self.assertTrue(User.authenticate('deb', 'abc123'))
+        
+    def test_unsuccessful_authentication(self):
+        User.signup('deb', 'deb@test.com', 'abc123', User.image_url.default.arg)
+        
+        self.assertFalse(User.authenticate('deb', 'abc1234'))
+        self.assertFalse(User.authenticate('debb', 'abc123'))
