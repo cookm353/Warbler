@@ -61,8 +61,10 @@ class Likes(db.Model):
         
     @classmethod
     def check_for_like(cls, user_id, message_id):
-        return cls.query.filter(user_id == user_id and message_id == message_id).one_or_none()
+        return cls.query.filter_by(message_id=message_id, user_id=user_id).first()
 
+    def __repr__(self):
+        return f"<Likes user_id={self.user_id} message_id={self.message_id}>"
 
 class User(db.Model):
     """User in the system."""
