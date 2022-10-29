@@ -337,13 +337,15 @@ def homepage():
                 msgs.append(msg)
                 
         msgs_dict = {msg.timestamp: msg.id for msg in msgs}
-        sorted_dict = dict(sorted(msgs_dict.items(), reverse=True))
-        messages = [Message.get(val) for val in sorted_dict.values()]
+        sorted_msgs = dict(sorted(msgs_dict.items(), reverse=True))
+        messages = [Message.get(val) for val in sorted_msgs.values()]
         
         if len(messages) > 100:
             messages = messages[:100]
+            
+        likes = [like.id for like in g.user.likes]
         
-        return render_template('home.html', messages=messages)
+        return render_template('home.html', messages=messages, likes=likes)
 
     else:
         return render_template('home-anon.html')
