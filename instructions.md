@@ -71,9 +71,9 @@ PorousLoris
 ## Part 2: Add Likes
 
 - Don't use any JS for this step!
-- [ ] Add a feature allowing a user to like and unlike warbles
+- [x] Add a feature allowing a user to like and unlike warbles
   - [x] Users should only be able to like warbles written by other users
-  - [ ] Liking a warble should add a star or some other symbol next to the liked warble
+  - [x] Liking a warble should add a star or some other symbol next to the liked warble
   - [x] Liking and unliking a warble should be done by clicking on the star (or other symbol)
 - [ ] Profile page should show how many warbles the user has liked
   - [ ] There should be a link to a page showing the user's liked warbles
