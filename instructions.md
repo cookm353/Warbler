@@ -75,24 +75,24 @@ PorousLoris
   - [x] Users should only be able to like warbles written by other users
   - [x] Liking a warble should add a star or some other symbol next to the liked warble
   - [x] Liking and unliking a warble should be done by clicking on the star (or other symbol)
-- [ ] Profile page should show how many warbles the user has liked
-  - [ ] There should be a link to a page showing the user's liked warbles
+- [x] Profile page should show how many warbles the user has liked
+  - [x] There should be a link to a page showing the user's liked warbles
 
 ## Part 3: Add Tests
 
 - There are 4 test files: test_user_model.py, test_user_views.py, test_message_model.py, and test_message_views.py
   - Two tests for testing models, and two for testing routes/view functions
 - Tests for user model to include:
-  - [ ] Does repr work properly?
-  - [ ] Does is_following detect when user1 is following user2?
-  - [ ] Does is_following detect when user1 isn't following user2?
-  - [ ] Does is_followed_by successfully detect when user1 is followed by user2?
-  - [ ] Does is_followed_by successfully detect when user1 is not followed by user2?
-  - [ ] Does User.create successfully create a new user given valid credentials?
-  - [ ] Does User.create fail to create a new user if any of the validations (e.g. uniqueness, non-nullable fields) fail?
-  - [ ] Does User.authenticate successfully return a user when given a valid username and password?
-  - [ ] Does User.authenticate fail to return a user when the username is invalid?
-  - [ ] Does User.authenticate fail to return a user when the password is invalid?
+  - [x] Does repr work properly?
+  - [x] Does is_following detect when user1 is following user2?
+  - [x] Does is_following detect when user1 isn't following user2?
+  - [x] Does is_followed_by successfully detect when user1 is followed by user2?
+  - [x] Does is_followed_by successfully detect when user1 is not followed by user2?
+  - [x] Does User.create successfully create a new user given valid credentials?
+  - [x] Does User.create fail to create a new user if any of the validations (e.g. uniqueness, non-nullable fields) fail?
+  - [x] Does User.authenticate successfully return a user when given a valid username and password?
+  - [x] Does User.authenticate fail to return a user when the username is invalid?
+  - [x] Does User.authenticate fail to return a user when the password is invalid?
 - Include similar tests for the message model
 - Tests routes as per usual
 
